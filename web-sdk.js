@@ -1839,17 +1839,12 @@
         }
 
         function r() {
-            var e, t, n, i, o = m.document.cookie,
-                r = {};
-            if (!o || "string" != typeof o) return {};
-            o = o.split(/;\s/);
-            for (e = o.length; e--;) try {
-                t = o[e].match(/^([^=]+)(=(.*))?$/);
-                if (!t) continue;
-                n = p(t[1]);
-                i = p(t[3] || "");
-                r[n] = i;
-            } catch (e) { }
+            var n, i, r = {};
+            for (var key in localStorage) try {
+              n = p(key);
+              i = p(localStorage.getItem(key));
+              r[n] = i;
+            } catch (e) {}
             return r;
         }
 
@@ -1876,8 +1871,14 @@
                 i += "; expires=" + o.toGMTString();
             }
             "path" in n && (i += "; path=" + n.path);
+            "domain" in n && (i += "; domain=" + n.domain);
             n.secure && (i += "; secure");
-            m.document.cookie = i;
+            // m.document.cookie = i;
+            if (t) {
+              localStorage.setItem(e, t);
+            } else {
+              localStorage.removeItem(e);
+            }
         }
 
         function u(e, t, n) {
