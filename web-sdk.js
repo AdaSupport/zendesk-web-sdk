@@ -1840,9 +1840,9 @@
 
         function r() {
             var n, i, r = {};
-            for (let i = 0; i < localStorage.length; i++) try {
-                const key = localStorage.key(i);
-                const val = localStorage.getItem(key);
+            for (var i = 0; i < localStorage.length; i++) try {
+                var key = localStorage.key(i);
+                var val = localStorage.getItem(key);
                 n = p(key);
                 i = p(val);
                 r[n] = i;
@@ -1876,8 +1876,8 @@
             "domain" in n && (i += "; domain=" + n.domain);
             n.secure && (i += "; secure");
             // m.document.cookie = i;
-            const key = f(e);
-            const val = f(t);
+            var key = f(e);
+            var val = f(t);
 
             if (val) {
                 localStorage.setItem(key, val);
