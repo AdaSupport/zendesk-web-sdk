@@ -1840,11 +1840,13 @@
 
         function r() {
             var n, i, r = {};
-            for (var key in localStorage) try {
-              n = p(key);
-              i = p(localStorage.getItem(key));
-              r[n] = i;
-            } catch (e) {}
+            for (let i = 0; i < localStorage.length; i++) try {
+                const key = localStorage.key(i);
+                const val = localStorage.getItem(key);
+                n = p(key);
+                i = p(val);
+                r[n] = i;
+            } catch (e) { }
             return r;
         }
 
@@ -1874,10 +1876,13 @@
             "domain" in n && (i += "; domain=" + n.domain);
             n.secure && (i += "; secure");
             // m.document.cookie = i;
-            if (t) {
-              localStorage.setItem(e, t);
+            const key = f(e);
+            const val = f(t);
+
+            if (val) {
+                localStorage.setItem(key, val);
             } else {
-              localStorage.removeItem(e);
+                localStorage.removeItem(key);
             }
         }
 
