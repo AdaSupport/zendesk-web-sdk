@@ -1840,13 +1840,12 @@
 
         function r() {
             var n, i, r = {};
-            for (var i = 0; i < localStorage.length; i++) try {
-                var key = localStorage.key(i);
+            Object.keys(localStorage).forEach(function(key){
                 var val = localStorage.getItem(key);
                 n = p(key);
                 i = p(val);
                 r[n] = i;
-            } catch (e) { }
+            });
             return r;
         }
 
