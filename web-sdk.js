@@ -1839,13 +1839,15 @@
         }
 
         function r() {
-            var n, i, r = {};
-            Object.keys(localStorage).forEach(function(key){
-                var val = localStorage.getItem(key);
-                n = p(key);
-                i = p(val);
-                r[n] = i;
-            });
+            var r = {};
+
+            if (localStorage) {
+                Object.keys(localStorage).forEach(function (key) {
+                    var val = localStorage.getItem(key);
+                    r[key] = val;
+                });
+            }
+
             return r;
         }
 
@@ -1863,20 +1865,13 @@
         }
 
         function c(e, t, n) {
-            n = n || {};
-            var i = f(e) + "=" + f(t);
-            if ("ttl" in n) {
-                var o = new Date(),
-                    r = 24 * n.ttl * 60 * 60 * 1e3;
-                o.setTime(o.getTime() + r);
-                i += "; expires=" + o.toGMTString();
+            var key = e;
+            var val = t;
+
+            // If localStorage is unaccessible (privacy) skip set/remove item
+            if (!localStorage) {
+                return
             }
-            "path" in n && (i += "; path=" + n.path);
-            "domain" in n && (i += "; domain=" + n.domain);
-            n.secure && (i += "; secure");
-            // m.document.cookie = i;
-            var key = f(e);
-            var val = f(t);
 
             if (val) {
                 localStorage.setItem(key, val);
