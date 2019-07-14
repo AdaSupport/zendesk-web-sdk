@@ -1841,12 +1841,12 @@
         function r() {
             var r = {};
 
-            if (localStorage) {
+            try {
                 Object.keys(localStorage).forEach(function (key) {
                     var val = localStorage.getItem(key);
                     r[key] = val;
                 });
-            }
+            } catch (e) { }
 
             return r;
         }
@@ -1869,15 +1869,13 @@
             var val = t;
 
             // If localStorage is unaccessible (privacy) skip set/remove item
-            if (!localStorage) {
-                return
-            }
-
-            if (val) {
-                localStorage.setItem(key, val);
-            } else {
-                localStorage.removeItem(key);
-            }
+            try {
+                if (val) {
+                    localStorage.setItem(key, val);
+                } else {
+                    localStorage.removeItem(key);
+                }
+            } catch (e) { }
         }
 
         function u(e, t, n) {
