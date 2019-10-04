@@ -1840,9 +1840,7 @@
 
         function getZendeskStorage() {
           // Check or Initalize Storage
-          console.log("pre", window.zendeskStorage);
           window.zendeskStorage = window.zendeskStorage ? window.zendeskStorage : {};
-          console.log("post", window.zendeskStorage);
           return window.zendeskStorage;
         }
 
@@ -1857,7 +1855,6 @@
             } catch (e) {
               r = getZendeskStorage();
             }
-            console.log("get", r);
 
             return r;
         }
@@ -1878,7 +1875,6 @@
         function c(e, t, n) {
             var key = e;
             var val = t;
-            console.log("pree")
             // If localStorage is unaccessible (privacy) use memory
             try {
               if (val) {
@@ -1886,7 +1882,6 @@
               } else {
                   localStorage.removeItem(key);
               }
-              console.log("set", localStorage);
             } catch (e) {
               var storage = getZendeskStorage();
               if (val) {
@@ -1894,7 +1889,6 @@
               } else {
                   delete storage[key];
               }
-              console.log("set", storage);
             }
         }
 
