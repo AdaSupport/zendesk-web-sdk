@@ -1838,6 +1838,14 @@
             return "string" == typeof e && "" != e;
         }
 
+        function getZendeskStorage() {
+          // Check or Initalize Storage
+          console.log("pre", window.zendeskStorage);
+          window.zendeskStorage = window.zendeskStorage ? window.zendeskStorage : {};
+          console.log("post", window.zendeskStorage);
+          return window.zendeskStorage;
+        }
+
         function r() {
             var r = {};
 
@@ -1846,7 +1854,10 @@
                     var val = localStorage.getItem(key);
                     r[key] = val;
                 });
-            } catch (e) { }
+            } catch (e) {
+              r = getZendeskStorage();
+            }
+            console.log("get", r);
 
             return r;
         }
@@ -1867,15 +1878,24 @@
         function c(e, t, n) {
             var key = e;
             var val = t;
-
-            // If localStorage is unaccessible (privacy) skip set/remove item
+            console.log("pree")
+            // If localStorage is unaccessible (privacy) use memory
             try {
-                if (val) {
-                    localStorage.setItem(key, val);
-                } else {
-                    localStorage.removeItem(key);
-                }
-            } catch (e) { }
+              if (val) {
+                  localStorage.setItem(key, val);
+              } else {
+                  localStorage.removeItem(key);
+              }
+              console.log("set", localStorage);
+            } catch (e) {
+              var storage = getZendeskStorage();
+              if (val) {
+                  storage[key] = val;
+              } else {
+                  delete storage[key];
+              }
+              console.log("set", storage);
+            }
         }
 
         function u(e, t, n) {
