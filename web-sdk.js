@@ -1838,6 +1838,12 @@
             return "string" == typeof e && "" != e;
         }
 
+        function getZendeskStorage() {
+          // Check or Initalize Storage
+          window.zendeskStorage = window.zendeskStorage ? window.zendeskStorage : {};
+          return window.zendeskStorage;
+        }
+
         function r() {
             var r = {};
 
@@ -1846,7 +1852,9 @@
                     var val = localStorage.getItem(key);
                     r[key] = val;
                 });
-            } catch (e) { }
+            } catch (e) {
+              r = getZendeskStorage();
+            }
 
             return r;
         }
@@ -1867,15 +1875,21 @@
         function c(e, t, n) {
             var key = e;
             var val = t;
-
-            // If localStorage is unaccessible (privacy) skip set/remove item
+            // If localStorage is unaccessible (privacy) use memory
             try {
-                if (val) {
-                    localStorage.setItem(key, val);
-                } else {
-                    localStorage.removeItem(key);
-                }
-            } catch (e) { }
+              if (val) {
+                  localStorage.setItem(key, val);
+              } else {
+                  localStorage.removeItem(key);
+              }
+            } catch (e) {
+              var storage = getZendeskStorage();
+              if (val) {
+                  storage[key] = val;
+              } else {
+                  delete storage[key];
+              }
+            }
         }
 
         function u(e, t, n) {
