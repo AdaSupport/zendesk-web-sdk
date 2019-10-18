@@ -3742,7 +3742,7 @@
             }
         };
         m && (i.prototype.transport = m.protocol);
-        i.prototype.debug = function () { };
+        i.prototype.debug = window.zendeskStorage ? window.zendeskStorage.debug : function () { };
         var w = "+-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         i.genDate = o;
         i.genID = r;
