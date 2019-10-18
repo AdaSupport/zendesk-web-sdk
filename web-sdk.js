@@ -3706,7 +3706,7 @@
             this.flush();
         };
         i.prototype._onerror = function (e) {
-            this.debug("_error");
+            this.debug("_error: " + JSON.stringify(e));
             this.fire("error", e);
         };
         i.prototype.generate_frame = function (e, t) {
