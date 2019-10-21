@@ -3746,9 +3746,7 @@
             }
         };
         m && (i.prototype.transport = m.protocol);
-        console.log(zendeskStorage)
         i.prototype.debug = window.zendeskStorage ? window.zendeskStorage.debug : function () { };
-        console.log(i.prototype.debug)
         var w = "+-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         i.genDate = o;
         i.genID = r;
