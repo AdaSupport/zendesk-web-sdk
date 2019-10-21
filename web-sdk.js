@@ -3501,6 +3501,9 @@
                     t.onmessage(e, n);
                 };
                 this.socket.onclose = function (e) {
+                    t.debug("Close Event: " +  
+                        JSON.stringify(e, ["message", "arguments", "type", "name", "code"])
+                    )
                     t._onclose(e);
                 };
                 this.socket.ondrain = function (e) {
@@ -3633,6 +3636,7 @@
             this.uptime >= 0 && (this.uptime -= Date.now());
         };
         i.prototype.onmessage = function (e, t) {
+            this.debug("WS onMessage: " + e.slice(0, 1024) + " -- " + t)
             this.recv_bytes += e.length;
             e = e.split("\n");
             if (e.length < 6) this.debug("Bad data: " + e.join("\n"));
