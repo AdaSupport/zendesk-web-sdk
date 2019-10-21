@@ -3502,7 +3502,7 @@
                 };
                 this.socket.onclose = function (e) {
                     t.debug("Close Event: " +  
-                        JSON.stringify(e, ["message", "arguments", "type", "name"])
+                        JSON.stringify(e, ["message", "arguments", "type", "name", "code"])
                     )
                     t._onclose(e);
                 };
