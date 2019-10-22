@@ -1860,8 +1860,8 @@
         }
         var d = n(10),
             f = {
-                set: c,
-                get: s,
+                set: (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) || c,
+                get: (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) || s,
                 getJSONCookie: a,
                 setJSONCookie: u,
                 remove: l,
@@ -3363,7 +3363,7 @@
             }
         };
         m && (i.prototype.transport = m.protocol);
-        i.prototype.debug = function() {};
+        i.prototype.debug = (window.zendeskOverrides && window.zendeskOverrides.debug) || function() {};
         var w = "+-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         i.genDate = r;
         i.genID = o;
