@@ -1821,10 +1821,11 @@
         }
 
         function s(e) {
+            var val;
             if (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) {
-                return r(e) ? window.zendeskOverrides.getLocalStorage()[e] || null : null;
+                val = r(e) && window.zendeskOverrides.getLocalStorage()[e];
             }
-            return r(e) ? o()[e] || null : null;
+            return r(e) ? (val || o()[e]) || null : null;
         }
 
         function a(e) {
