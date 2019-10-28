@@ -1821,7 +1821,11 @@
         }
 
         function s(e) {
-            return r(e) ? o()[e] || null : null;
+            var val;
+            if (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) {
+                val = r(e) && window.zendeskOverrides.getLocalStorage()[e];
+            }
+            return r(e) ? (val || o()[e]) || null : null;
         }
 
         function a(e) {
@@ -1834,6 +1838,9 @@
         }
 
         function c(e, t, n) {
+            if (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) {
+                window.zendeskOverrides.setLocalStorage(e, t, n);
+            }
             n = n || {};
             var i = h(e) + "=" + h(t);
             if ("ttl" in n) {
@@ -1860,8 +1867,8 @@
         }
         var d = n(10),
             f = {
-                set: (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) || c,
-                get: (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) || s,
+                set: c,
+                get: s,
                 getJSONCookie: a,
                 setJSONCookie: u,
                 remove: l,
