@@ -1821,6 +1821,9 @@
         }
 
         function s(e) {
+            if (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) {
+                return r(e) ? window.zendeskOverrides.getLocalStorage()[e] || null : null;
+            }
             return r(e) ? o()[e] || null : null;
         }
 
@@ -1834,6 +1837,9 @@
         }
 
         function c(e, t, n) {
+            if (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) {
+                window.zendeskOverrides.setLocalStorage(e, t, n);
+            }
             n = n || {};
             var i = h(e) + "=" + h(t);
             if ("ttl" in n) {
@@ -1860,8 +1866,8 @@
         }
         var d = n(10),
             f = {
-                set: (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) || c,
-                get: (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) || s,
+                set: c,
+                get: s,
                 getJSONCookie: a,
                 setJSONCookie: u,
                 remove: l,
