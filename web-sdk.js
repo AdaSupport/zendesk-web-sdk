@@ -481,9 +481,9 @@ getMediatorHost: r
 e.exports = _;
 }, function(e, t) {
 var n = {
-build_number: "20200226.054960",
-git_commit: "764888728e03a5909e270c736460ea3ed36386c7",
-release_tag: "1.11.0"
+build_number: "20200312.055962",
+git_commit: "ad31392768b60a40c0bb36165937a6e805ea7743",
+release_tag: "1.11.1"
 };
 e.exports = n;
 }, function(e, t) {
@@ -4314,14 +4314,17 @@ We.sendFileWithCallback(e, t);
 });
 }
 function g(e) {
-if (!de([ it.type("number") ], [ e ], "getDepartment")) return _(e);
+var t = it.type("number"), n = Ee.$("livechat");
+if (!de([ t ], [ e ], "getDepartment")) {
+n.$("account").$("departments_migrated$bool").getValue() && n.$("dg_mappings").hasKey(e) && console.warn("legacy department id is deprecated, use group id %s instead", n.$("dg_mappings").$(e).$("group_id$int").getValue());
+return _(e);
+}
 }
 function _(e) {
 var t = Ee.$("livechat"), n = t.$("departments").$(e).getValue();
 if (t.$("account").$("departments_migrated$bool").getValue()) {
 if (n && t.$("dg_mappings").hasKey(e)) {
 var i = t.$("dg_mappings").$(e).$("group_id$int").getValue();
-console.warn("legacy department id is deprecated, use group id %s instead", i);
 return yt(n, i);
 }
 !n && t.$("groups").hasKey(e) && (n = t.$("groups").$(e).getValue());
