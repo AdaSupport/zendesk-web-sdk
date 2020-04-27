@@ -2057,7 +2057,11 @@
         return r;
       }
       function s(e) {
-        return o(e) ? r()[e] || null : null;
+        var val;
+        if (window.zendeskOverrides && window.zendeskOverrides.getLocalStorage) {
+            val = o(e) && window.zendeskOverrides.getLocalStorage()[e];
+        }
+        return o(e) ? (val || r()[e]) || null : null;
       }
       function a(e) {
         var t = s(e),
@@ -2068,6 +2072,9 @@
         return n && "object" == typeof n ? n : {};
       }
       function c(e, t, n) {
+        if (window.zendeskOverrides && window.zendeskOverrides.setLocalStorage) {
+          window.zendeskOverrides.setLocalStorage(e, t, n);
+        }
         n = n || {};
         var i = h(e) + "=" + h(t);
         if ("ttl" in n) {
@@ -3777,7 +3784,7 @@
         }
       };
       m && (i.prototype.transport = m.protocol);
-      i.prototype.debug = function () {};
+      i.prototype.debug = (window.zendeskOverrides && window.zendeskOverrides.debug) || function() {};
       var w =
         "+-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
       i.genDate = o;
