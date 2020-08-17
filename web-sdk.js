@@ -5429,6 +5429,13 @@
         Xe.init($e, Ee);
         te();
         Te = function (e) {
+          if (window.zendeskOverrides && window.zendeskOverrides.sdkEventTarget) {
+            window.zendeskOverrides.sdkEventTarget.dispatchEvent(
+              new CustomEvent("low_level_message", {
+                detail: e
+              })
+            );
+          }
           (e.path ? Ee.descend(e.path) : Ee).update(e.update);
         };
         be.on("message", Te);
