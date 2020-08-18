@@ -5430,6 +5430,8 @@
         te();
         Te = function (e) {
           if (window.zendeskOverrides && window.zendeskOverrides.sdkEventTarget) {
+            // Dispatch an event for all messages "e". We use this to expose "low level"
+            // messages that we otherwise don't have access to.
             window.zendeskOverrides.sdkEventTarget.dispatchEvent(
               new CustomEvent("low_level_message", {
                 detail: e
